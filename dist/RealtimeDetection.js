@@ -34,7 +34,7 @@ const RealTimeDetection = ({ setIsModalOpen, }) => {
     const imgRef = (0, react_1.useRef)(null);
     const wsRef = (0, react_1.useRef)(null);
     (0, react_1.useEffect)(() => {
-        const ws = new WebSocket('ws://107.167.183.252:8000/ws');
+        const ws = new WebSocket('ws://35.234.40.146:8000/ws');
         wsRef.current = ws;
         ws.onopen = () => {
             console.log('WebSocket is open now.');

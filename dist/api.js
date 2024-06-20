@@ -12,22 +12,32 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.postPushNotificationTrigger = void 0;
+exports.postPushNotificationTrigger = exports.registerCCTV = void 0;
 const axios_1 = __importDefault(require("axios"));
 const client = axios_1.default.create({
-    baseURL: 'https://peacewatcher.shop/alert',
+    baseURL: 'https://peacewatcher.shop',
     headers: {
-        'Content-type': 'application/json',
+        'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
     },
 });
-const postPushNotificationTrigger = () => __awaiter(void 0, void 0, void 0, function* () {
+const registerCCTV = (cctvData) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const response = yield client.post(`/send`);
-        console.log(response);
+        const response = yield client.post(`/alert/registerCCTV`, cctvData);
+        return response.data;
     }
     catch (error) {
-        console.error(error);
+        throw new Error(`CCTV registration failed: ${error.message}`);
+    }
+});
+exports.registerCCTV = registerCCTV;
+const postPushNotificationTrigger = () => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const response = yield client.post(`/alert/send`);
+        console.log('Push notification sent:', response.data);
+    }
+    catch (error) {
+        console.error('Error sending push notification:', error);
     }
 });
 exports.postPushNotificationTrigger = postPushNotificationTrigger;

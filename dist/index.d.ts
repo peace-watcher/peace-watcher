@@ -1,2 +1,3 @@
 export { default as RealTimeDetection } from './RealtimeDetection';
-export { postPushNotificationTrigger } from './api';
+export { default as PeaceWatcher } from './PeaceWatcher';
+export { postPushNotificationTrigger, registerCCTV } from './api';
